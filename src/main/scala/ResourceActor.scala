@@ -46,8 +46,17 @@ class ResourceActor extends Actor {
 
   private def createJob(): FutureTask[Unit] = {
     val task = new FutureTask[Unit](() => {
-      Thread.sleep(30000)
-      self ! Completed
+      logger.info("long computation started")
+      try {
+        Thread.sleep(30000)
+        self ! Completed
+      } catch {
+          case e: InterruptedException => {
+            logger.warn("computation cancelled")
+            throw e
+          }
+      }
+      
     })
 
     executor.submit(task)

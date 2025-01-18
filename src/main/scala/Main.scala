@@ -19,8 +19,7 @@ object Main extends App {
   // CLI loop
   breakable {
     while (true) {
-      println("\n")
-      print("Enter your choice: ")
+      print("\nEnter your choice: ")
       val choice = StdIn.readLine()
 
       choice match {
@@ -36,6 +35,7 @@ object Main extends App {
         case _ =>
           println("Invalid option. Please choose 1, 2, or 3.")
       }
+      Thread.sleep(250)
     }
   }
 
